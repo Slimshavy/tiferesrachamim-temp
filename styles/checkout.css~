@@ -1,0 +1,105 @@
+/* Base styles */
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+html {
+  font-size: 100%;
+  line-height: 1.5;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
+  color: #777;
+}
+
+/* Container */
+.container {
+  position: absolute;
+  width: 50em;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%, -50%);/*-50%,-50%*/
+}
+
+/* Profile Card */
+.profile {
+  position: relative;
+  width:100%;
+}
+.profile__form {
+  height: auto;
+  opacity: 1;
+  background: white;
+  padding-top: 12em;
+  position: relative;
+  padding: 3em;
+  border-radius: .25em;
+  -webkit-filter: drop-shadow(0 0 2em rgba(0,0,0,0.2));
+  width:100%;
+}
+.profile__fields {
+  opacity: 1;
+}
+
+.profile__footer {
+  padding-top: 1em;
+}
+
+
+/* Form */
+.input {
+  width: 100%;
+  font-size: 100%;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  height: 2rem;
+  line-height: 2rem;
+  border-bottom: 1px solid #eee;
+  color: #777;
+  position: relative;
+  margin-bottom: 2em;
+}
+
+.cvv, .expiration, .city {
+  width: 49%;
+}
+
+.state, .postal{
+	width:24%;
+}
+
+.input:focus {
+  outline: 0;
+  border-color: #ccc;
+}
+
+/* Button */
+.btn {
+  position:relative;
+  border: 0;
+  font-size: 0.75rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding: 0 1.5rem;
+  color: white;
+  background: #8E49E8;
+  text-transform: uppercase;
+  border-radius: .25rem;
+  letter-spacing: .2em;
+  transform: translateX(-50%);
+  left:50%;
+}
+.btn:focus {
+  outline: 0;
+}
+.btn:hover,
+.btn:focus {
+  background: #A678E2;
+}
+
