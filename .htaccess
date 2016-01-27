@@ -1,0 +1,7 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteRule ^(donate|checkout)/?$ /$1.php [NC,L]
+
+ErrorDocument 404 /notfound.php
+ErrorDocument 403 /notfound.php

@@ -1,74 +1,68 @@
+<?php
+	ini_set('display_errors','On');
+	require_once('braintree-php/lib/Braintree.php');
+
+	$braintree = include('config/braintree.php');
+	Braintree_Configuration::environment($braintree['environment']);
+	Braintree_Configuration::merchantId($braintree['merchantId']);
+	Braintree_Configuration::publicKey($braintree['publicKey']);	
+	Braintree_Configuration::privateKey($braintree['privateKey']);
+?>
+﻿<!DOCTYPE HTML>
 <html>
-	<head>
-		<title> Tiferes Rachamim - Donate</title>
+   <head>
+      <title> Tiferes Rachamim - Donate</title>
+<?php
+	include("include/headers.html");
+?>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js"></script>
+      <script src="scripts/braintree.js"></script>
+      <script src="scripts/jquery.payment.min.js"></script>
+      <script src="scripts/donate.js"></script>
+      <link rel="stylesheet" type="text/css" href="styles/donate.css" />
+   </head>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
-	        <script src="http://localhost/js/index.js"></script>
-		<link rel="stylesheet" type="text/css" href="styles/checkout.css">
+   <body>
+<?php
+	include("include/body-head.html");
+?>
+         <div class="wrap">
+	    <h1>Donate to Tiferes Rachamim</h1>
+            <div class="clear"></div>
 
-		<script>
-			$.get('payment.php?type=token',function(data){
- 				braintree.setup(data, "custom", {id: "checkout"});
-			});
-		</script>
-	</head>
+            <form id="checkout" action="/checkout" method="post" class="profile__form">
+               <div class="profile__fields">
+  	  	  <input class="input card-number" data-braintree-name="number" placeholder="Credit Card Number" maxLength="19" 							onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="4111111111111111" required>
 
-	<body>
+  	          <input class="input cvv" data-braintree-name="cvv" placeholder="Security Code" value="100" required>
+	  	  <input class="input expiration" data-braintree-name="expiration_date" placeholder="Expiration (mm/yy)" value="10/20" required>
 
+	  	  <input class="input " data-braintree-name="cardholder_name" placeholder="Cardholder Name" value="John Smith" required>
+	  	  <input class="input" data-braintree-name="street_address" placeholder="Address" value="799 montgomery st" required>
+	  	  <input class="input city" data-braintree-name="locality" placeholder="City" value="Brooklyn" required>
+	  	  <input class="input state" data-braintree-name="region" placeholder="State (e.g. NY)" pattern="[a-zA-Z]{2}" required>
+	  	  <input class="input postal" data-braintree-name="postal_code" placeholder="Zip" pattern="\d{5}" required>
+	  	  <input class="input" name="email" placeholder="Email Address" type="email" required>
 
-	<div class="container">
-		<div class="profile">
-			<form id="checkout" action="checkout.php" method="post" class="profile__form">
-				<div class="profile__fields">
+		  <input class="input" name="amount" placeholder="Amount" autocomplete="off" required>
+		  <div id="errors">
 
-				  	<input class="input card-number" data-braintree-name="number" placeholder="Credit Card Number" maxLength="19" 							onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="4111111111111111">
-
-			  		<input class="input cvv" data-braintree-name="cvv" placeholder="Security Code" value="100">
-				  	<input class="input expiration" data-braintree-name="expiration_date" placeholder="Expiration: mm/yy" value="10/20">
-
-				  	<input class="input " data-braintree-name="cardholder_name" placeholder="Cardholder Name" value="John Smith">
-				  	<input class="input" data-braintree-name="street_address" placeholder="Address" value="799 montgomery st">
-				  	<input class="input city" data-braintree-name="locality" placeholder="City" value="Brooklyn">
-				  	<input class="input state" data-braintree-name="reigon" placeholder="State" value="NY">
-				  	<input class="input postal" data-braintree-name="postal_code" placeholder="Zip" value="94107">
-
-					<input class="input" name="amount" placeholder="Amount" value="1500.00" >
-
-					<div class="profile__footer">
-					  	<input class="btn" type="submit" id="submit" value="Donate">
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-    
-        <script src="js/index.js"></script>
-
-
-
-		<!--form id="checkout" method="post" action="checkout.php">
-  			<div id="payment-form"></div>
-			<input type='text' name='amount' class="postal-code card-field" placeholder='Amount'/>
-  			<input type="submit" value="Donate">
-		</form-->
-
-		<!--form id="checkout" action="checkout.php" method="post">
-		  	<input data-braintree-name="number" value="4111111111111111">
-	  		<input data-braintree-name="cvv" value="100">
-
-		  	<input data-braintree-name="expiration_date" value="10/20">
-
-		  	<input data-braintree-name="cardholder_name" value="John Smith">
-		  	<input data-braintree-name="street_address" value="799 montgomery st">
-		  	<input data-braintree-name="locality" value="Brooklyn">
-		  	<input data-braintree-name="reigon" value="NY">
-		  	<input data-braintree-name="postal_code" value="94107">
-
-			<input name="amount" value="1500.00" >
-		  	<input type="submit" id="submit" value="Pay">
-		</form-->
-
-
-	</body>
-<html>
+		  </div>
+<?php
+	echo "<input class='client-token' type='hidden' value='".Braintree_ClientToken::generate()."'>";
+?>
+		<input name='client-tz' class='client-tz' type='hidden'>
+		  <div class="profile__footer">
+		     <h3>Please click the Donate button only once</h3> 
+            	     <div class="clear"></div>
+		     <input class="btn" type="submit" id="submit" value="Donate">
+		  </div>
+	       </div>
+	    </form>
+         </div>
+ 
+<?php
+	include("include/body-foot.html");
+?>
+   </body>
+</html>

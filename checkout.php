@@ -1,173 +1,175 @@
-/* Base styles */
-*, *:after, *:before {
-  box-sizing: border-box;
-}
-html {
-  font-size: 100%;
-  line-height: 1.5;
-  height: 100%;
-}
+<?php
+	ini_set('display_errors','On');
 
-body {
-  position: relative;
-  margin: 0;
-  font-family: 'Work Sans', Arial, Helvetica, sans-serif;
-  min-height: 100%;
-  background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
-  color: #777;
-}
-img {
-  vertical-align: middle;
-  max-width: 100%;
-}
-button {
-  cursor: pointer;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-}
+	require_once('braintree-php/lib/Braintree.php');
+	require_once("dal/access.php");
 
-/* Container */
-.container {
-  position: absolute;
-  width: 24em;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
+	$dbAccess = new MysqlAccess();
 
-/* Profile Card */
-.profile {
-  position: relative;
-}
-.profile--open {
-}
-.profile--open .profile__form {
-  visibility: visible;
-  height: auto;
-  opacity: 1;
-  transform: translateY(-6em);
-  padding-top: 12em;
-}
-.profile--open .profile__fields {
-  opacity: 1;
-  visibility: visible;
-}
-.profile--open .profile__avatar {
-  transform: translate(-50%, -1.5em);
-  border-radius: 50%;
-}
-.profile__form {
-  position: relative;
-  background: white;
-  visibility: hidden;
-  opacity: 0;
-  height: 0;
-  padding: 3em;
-  border-radius: .25em;
-  -webkit-filter: drop-shadow(0 0 2em rgba(0,0,0,0.2));
-  transition: 
-    opacity .4s ease-in-out,
-    height .4s ease-in-out,
-    transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    padding .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.profile__fields {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.profile__avatar {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 1.25em;
-  overflow: hidden;
-  width: 4.5em;
-  height: 4.5em;
-  display: block;
-  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  will-change: transform;
-}
-.profile__avatar:focus {
-  outline: 0;
-}
-.profile__footer {
-  padding-top: 1em;
-}
+	$braintree = include('config/braintree.php');
+	Braintree_Configuration::environment($braintree['environment']);
+	Braintree_Configuration::merchantId($braintree['merchantId']);
+	Braintree_Configuration::publicKey($braintree['publicKey']);	
+	Braintree_Configuration::privateKey($braintree['privateKey']);
+	
+	$nonce = $_POST['payment_method_nonce'];
+	$amount = $_POST['amount'];
+	$email = $_POST['email'];
+	
+	$result = Braintree_Transaction::sale([
+  		'amount' => $amount,
+  		'paymentMethodNonce' => $nonce,
+		'options' => [
+		    'submitForSettlement' => True
+		]
+	]);
+
+	if(!$result->transaction)
+	{
+	 	header('Location: /donate'); 
+		exit();
+	}
+
+	$trans = $result->transaction;
+	$card = $trans->creditCard;//last4, debit, prepaid
+
+	$message = '';
+	$header = '';
+
+	$paymentType 		= 'Credit card';
+	$responseCode 		= 0;
+	$gatewayRejectReason 	= $trans->gatewayRejectionReason;
+	$transStatus 		= $trans->status;
+	$processorResponseCode	= $trans->processorResponseCode;
+	$resultAmount 		= $trans->amount;
+	$last4 			= $card['last4'];
+	$cardType 		= $card['cardType'];
+	$cardHolderName 	= $card['cardholderName'];
+
+	$transDate = $trans->createdAt;
+	$transDate = $transDate->setTimezone(new DateTimeZone($_POST['client-tz']));
+	$transDateStr = $transDate->format('Y-m-d H:i:s');
+
+	if(strtolower($card['debit']) == 'yes')
+		$paymentType = 'Debit card';
+
+	else if(strtolower($card['prepaid']) == 'yes')
+		$paymentType = 'Prepaid card'; 
+
+	$sql = 'INSERT INTO donations (cardholder_name,	result_amount, request_amount, email, payment_type, card_type, trans_status,
+			processor_response_code,trans_date,gateway_reject_reason,last4) ';
+	$sql .= "VALUES ('$cardHolderName', $resultAmount, $amount, '$email', '$paymentType', '$cardType', '$transStatus', 
+			$processorResponseCode, '$transDateStr', '$gatewayRejectReason', '$last4');";
+
+	$confirmationNumber = $dbAccess->insert($sql);
+
+	if ($result->success)
+	{
+		$header = 'Thank you for your donation!';
+		$message = "Your donation has been succesfully processed. Thank you for helping us help you.";
+	}
+	else
+	{
+		$header = 'There was a problem processing your request';
+		if ($transStatus == 'gateway_rejected')
+		{
+			if ($gatewayRejectReason == 'avs')
+				$message = "Your bank was not able to validate the Billing Information. Please try again.";
+
+		 	else if ($gatewayRejectReason == 'fraud')
+				$message = "Your transaction was rejected due to suspected fraudulant activities.";
+
+			else if ($gatewayRejectReason == 'cvv')
+				$message = "Your bank was not able to validate the Security code. Please try again.";
+
+			else
+				$message = "The transaction was declined due to an unknown reason. Please contact your merchant for more information.";
+		}
+		else if ($transStatus == 'processor_declined')
+		{
+			if ($processorResponseCode == 2004)
+				$message = "The card provided is expired. Please try again with a different card.";
+
+			else if ($processorResponseCode == 2005)
+				$message = "The card number provided is invalid. Please try again.";		
+
+			else if ($processorResponseCode == 2006)
+				$message = "The Expiration Date provided was invalid. Please try again.";
+
+			else
+				$message = "The transaction was declined due to an unknown reason. Please contact your bank for more information.";
+		}
+		else
+		{
+			$message = "The transaction was declined due to an unknown reason. Please contact your merchant for more information.";
+		}
+	}
+?>﻿<!DOCTYPE HTML>
+<html>
+   <head>
+      <title> Tiferes Rachamim - Donate</title>
+<?php
+	require_once("include/headers.html");
+?>
+      <link rel="stylesheet" type="text/css" href="styles/donate.css" />
+   </head>
+   <body>
+<?php
+	require_once("include/body-head.html");
+?>
+
+         <div class="wrap">
+	    <h1><?php echo $header ?></h1>
+            <div class="clear"></div>
+
+	    <h2> <?php echo $message ?> </h2>
+<?php
+	if ($result->success)
+	{
+?>
+	<div class="vals-wrapper">
+            <span class='lbl'>Confirmation Number</span>
+            <span class='val'><?php echo $confirmationNumber; ?></span>
+            <div class="clear"></div>
+
+            <span class='lbl'>Amount</span>
+            <span class='val'><?php echo $resultAmount; ?></span>
+            <div class="clear"></div>
+
+            <span class='lbl'>Date</span>
+            <span class='val'><?php echo $transDate->format('n/j/Y g:i A'); ?></span>
+            <div class="clear"></div>
+
+            <span class='lbl'>Authorization Code</span>
+            <span class='val'><?php echo $trans->processorAuthorizationCode; ?></span>
+            <div class="clear"></div>
+
+            <span class='lbl'>Payment Type</span>
+            <span class='val'><?php echo $paymentType; ?></span>
+            <div class="clear"></div>
+
+            <span class='lbl'>Card Type</span>
+            <span class='val'><?php echo $cardType; ?></span>
+            <div class="clear"></div>
+
+            <span class='lbl'>Last 4 of Account Number</span>
+            <span class='val'><?php echo $last4; ?></span>
+            <div class="clear"></div>
+         </div>
+<?php
+	}
+?>
+	    <a onclick='window.print();' class='btn'> Print </a>
+	    <a href='donate.php' class='btn'> Return to donate page </a>
+         </div>
+
+<?php
+	require_once("include/body-foot.html");
+?>
+   </body>
+</html>
 
 
-/* Form */
-.field {
-  position: relative;
-  margin-bottom: 2em;
-}
-.label {
-  position: absolute;
-  height: 2rem;
-  line-height: 2rem;
-  bottom: 0;
-  color: #999;
-  transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.input {
-  width: 100%;
-  font-size: 100%;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  height: 2rem;
-  line-height: 2rem;
-  border-bottom: 1px solid #eee;
-  color: #777;
-  transition: all .2s ease-in;
-}
-.input:focus {
-  outline: 0;
-  border-color: #ccc;
-}
-
-/* Using required and a faux pattern to see if input has text from http://stackoverflow.com/questions/16952526/detect-if-an-input-has-text-in-it-using-css */
-.input:focus + .label,
-input:valid + .label {
-  transform: translateY(-100%);
-  font-size: 0.75rem;
-  color: #ccc;
-}
-
-/* Button */
-.btn {
-  border: 0;
-  font-size: 0.75rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  padding: 0 1.5rem;
-  color: white;
-  background: #8E49E8;
-  text-transform: uppercase;
-  border-radius: .25rem;
-  letter-spacing: .2em;
-  transition: background .2s;
-}
-.btn:focus {
-  outline: 0;
-}
-.btn:hover,
-.btn:focus {
-  background: #A678E2;
-}
 
 
-/* Intro animation */
-@keyframes intro {
-  from {
-    opacity: 0;
-    top: 0;
-  }
-  to {
-    opacity: 1;
-    top: 50%;
-  }
-}
+
