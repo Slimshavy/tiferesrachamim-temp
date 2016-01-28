@@ -83,8 +83,8 @@
 .profile__footer .btn
 {
   margin:0;
-  /*transform: translateX(-50%);
-  left:50%;*/
+  transform: translateX(-50%);
+  left:50%;
 }
 
 @media all and (max-width:640px) and (min-width:500px){
