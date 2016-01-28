@@ -1,5 +1,4 @@
 <?php
-
 	require_once("dal/access.php");
 
 	$dbAccess = new MysqlAccess();
@@ -17,9 +16,10 @@
 		    'submitForSettlement' => True
 		]
 	]);
-
+	
 	if(!$result->transaction)
 	{
+		ob_end_clean();
 	 	header('Location: /donate'); 
 		exit();
 	}

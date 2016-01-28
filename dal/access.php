@@ -7,7 +7,7 @@ class MysqlAccess
 	function __construct()
 	{
 		$this->config = require_once("config/db.php");
-		$this->conn = new mysqli($this->config['servername'], $this->config['username'], $this->config['password'], $this->config['database']);
+		$this->conn = new mysqli($this->config['hostname'], $this->config['username'], $this->config['password'], $this->config['database']);
 
 		if ($this->conn->connect_error) 
 		{

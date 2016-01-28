@@ -1,5 +1,5 @@
 <?php
-	require_once('/var/www/html/braintree/lib/Braintree.php');
+	require_once('braintree/lib/Braintree.php');
 
 	$braintree = include('config/braintree.php');
 	Braintree_Configuration::environment($braintree['environment']);

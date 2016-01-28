@@ -59,8 +59,8 @@
       <div class="wrap">
          <h1>Welcome to Tiferes Rachamim</h1>
          <div class="clear"></div>
-         <h2><a href="/donate"> Donate </a></h2>
-         <div class="clear"></div>
+         <!--h2><a href="/donate"> Donate </a></h2>
+         <div class="clear"></div-->
 
          <div class="vals-wrapper">
             <h2 id='zmanim-header'>Zmanim for Shabbos <?php echo $parsha; ?></h2>

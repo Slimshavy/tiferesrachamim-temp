@@ -26,6 +26,7 @@
 					$scripts .= "   <script type='text/javascript' src='/scripts/$script.js'></script> \n";
 		}
 	}
+	ob_start();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -55,6 +56,7 @@
       
 <?php
 	require_once($view);
+	ob_end_flush();
 ?>
 
 	<div class="clear"></div>

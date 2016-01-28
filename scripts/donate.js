@@ -3,7 +3,7 @@ $(document).ready(function () {
 	braintree.setup($('.client-token').val(), "custom", {id: "checkout"});
 
 	$('.card-number').payment('formatCardNumber');
-	$('.expiration').payment('formatCardExpiry');
+//	$('.expiration').payment('formatCardExpiry');
 	$('.cvv').payment('formatCardCVC');
 
 
