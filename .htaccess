@@ -1,7 +1,9 @@
 Options -Indexes
 
-RewriteEngine On
-RewriteRule ^(donate|checkout)/?$ /$1.php [NC,L]
+ErrorDocument 404 /master.php?route=notfound
+ErrorDocument 403 /master.php?route=notfound
 
-ErrorDocument 404 /notfound.php
-ErrorDocument 403 /notfound.php
+DirectoryIndex /master.php?route=index
+
+RewriteEngine On
+RewriteRule ^(donate|checkout)/?$ /master.php?route=$1 [NC,L]
