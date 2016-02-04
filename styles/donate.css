@@ -60,6 +60,7 @@
   border-color: #ccc;
 }
 .btn {
+  font-family: 'Abel', Ariel, Tahoma;
   position:relative;
   border: 0;
   height: 2.5rem;
@@ -72,11 +73,7 @@
   letter-spacing: .2em;
   margin-left: 5px;
 }
-.btn:focus {
-  outline: 0;
-}
-.btn:hover,
-.btn:focus {
+.btn:hover{
   background: #27bfb6;
 }
 

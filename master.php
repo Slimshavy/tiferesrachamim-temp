@@ -39,7 +39,6 @@
    <link rel="stylesheet" href="/styles/style.css" type="text/css" media="all" />
    <?php echo $styles; ?>
 
-   <script type="text/javascript" src="/scripts/jquery.js"></script>
    <?php echo $scripts; ?>
 </head>
 

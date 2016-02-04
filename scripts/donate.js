@@ -7,13 +7,19 @@ $(document).ready(function () {
 	$('#card-number input').payment('formatCardNumber');
 	$('#cvv input').payment('formatCardCVC');
 
-	$('#profile__form #submit').click(function(){
+	$('.profile__form #submit').click(function(){
 		var bad = false;
 		
 		$('.error-msg').each(function(index){
 			bad = bad || $(this).text().trim().length > 0;
 		});
-		return !bad;
+		if(bad)
+		{
+			$('.error-msg').animate({fontSize:'150%'},50);
+			$('.error-msg').animate({fontSize:'100%'},50);
+			return false;
+		}
+		return true;
 	});
 
 	$('#card-number input').focusout(function(){
