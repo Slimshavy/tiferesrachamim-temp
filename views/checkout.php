@@ -98,7 +98,10 @@
 				$message = "The card number provided is invalid. Please try again.";		
 
 			else if ($processorResponseCode == 2006)
-				$message = "The Expiration Date provided was invalid. Please try again.";
+				$message = "The Expiration Date provided was invalid. Please try again.";		
+
+			else if ($processorResponseCode == 2010)
+				$message = "Your bank was not able to validate the Security code. Please try again.";
 
 			else
 				$message = "The transaction was declined due to an unknown reason. Please contact your bank for more information.";
