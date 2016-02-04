@@ -1,6 +1,4 @@
 <?php
-	ini_set('display_errors','On');
-
         $candleLighting = 'N/A';
         $maariv = 'N/A';
 	$earliestMincha = 'N/A';
@@ -18,6 +16,7 @@
 	if($result)
 	{
 		$items = $result->items;
+
 		$cl;
 		foreach ($items as $item) 
 		{

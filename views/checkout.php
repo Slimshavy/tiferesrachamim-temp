@@ -9,6 +9,16 @@
 	$amount = $_POST['amount'];
 	$email = $_POST['email'];
 	
+	$emailPattern = '/^\S{2,}@\S{2,}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$/';
+	$amountPattern = '/^\d{1,5}(\.\d{2})?$/';
+
+	if(preg_match($emailPattern, $email) == false || preg_match($amountPattern, $amount) == false)
+	{
+		ob_end_clean();
+	 	header('Location: /donate'); 
+		exit();
+	}
+
 	$result = Braintree_Transaction::sale([
   		'amount' => $amount,
   		'paymentMethodNonce' => $nonce,
