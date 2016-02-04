@@ -37,7 +37,7 @@ html, body{
 }
 .wrap{
 	width:1200px;
-	padding:20px 0 0;
+	padding: 20px 0;
 	margin:0 auto;
 	transition:all .2s linear;
 	-moz-transition:all .2s linear;
@@ -47,7 +47,6 @@ html, body{
 }
 .menu-wrap{
 	width:1200px;
-	padding:0 40px;
 	margin:0 auto;
 	transition:all .2s linear;
 	-moz-transition:all .2s linear;
@@ -67,6 +66,14 @@ h2
 	font-family: 'Abel', Ariel, Tahoma;
 	color: #C4C4C4;
     margin-bottom:20px;
+}
+.menu-wrap .donate
+{
+    	text-align:center;
+	font-size:2em;
+	font-family: 'Abel', Ariel, Tahoma;
+	color: #C4C4C4;
+	float:right;
 }
 
 .lbl {
@@ -162,11 +169,9 @@ h2
 @media all and (max-width:1180px) and (min-width:1024px){
 	.wrap{
 		width:1000px;
-		padding: 30px;
 	}
 	.menu-wrap{
 		width:1000px;
-		padding:0 20px;
 	}
 	.content h1 {
 		font-size:2.5em;
@@ -183,11 +188,9 @@ h2
 @media all and (max-width:1024px) and (min-width:800px){
 	.wrap{
 		width:760px;
-		padding: 20px;
 	}
 	.menu-wrap{
 		width:760px;
-		padding:0 20px;
 	}
 	.content h1 {
 		font-size:2.5em;
@@ -203,11 +206,9 @@ h2
 @media all and (max-width:800px) and (min-width:640px){
 	.wrap{
 		width:600px;
-		padding: 20px;
 	}
 	.menu-wrap{
 		width:600px;
-		padding:0 20px;
 	}
 	.content h1 {
 		font-size:2em;
@@ -219,9 +220,6 @@ h2
 	#zmanim-header {
 		font-size:1.6em;
 	}
-	.logo {
-		margin-top: -32px;
-	}
 	.grid-desc p {
 		line-height: 1.5em;
 	}
@@ -229,11 +227,9 @@ h2
 @media all and (max-width:640px) and (min-width:560px){
 	.wrap{
 		width:520px;
-		padding: 20px;
 	}
 	.menu-wrap{
 		width:520px;
-		padding:0 20px;
 	}
 	.text{
 		display:none;
@@ -250,10 +246,6 @@ h2
 	}
 	#zmanim-header {
 		font-size:1.6em;
-	}
-	.logo {
-		margin: -20px 130px 0 0px;
-		padding:5px;
 	}
 	.span_1_of_3 {
 		width:100%;
@@ -265,11 +257,12 @@ h2
 @media all and (max-width:560px) and (min-width:480px){
 	.wrap{
 		width:440px;
-		padding: 20px;
 	}
 	.menu-wrap{
 		width:440px;
-		padding:0 20px;
+	}
+	.header{
+		padding: 10px 10px;
 	}
 	.text{
 		display:none;
@@ -287,10 +280,6 @@ h2
 	#zmanim-header {
 		font-size:1.6em;
 	}
-	.logo {
-		margin: -20px 130px 0 0px;
-		padding:5px;
-	}
 	.span_1_of_3 {
 		width:100%;
 	}
@@ -298,17 +287,18 @@ h2
 		float:none;
 	}
 }
-@media all and (max-width:480px) and (min-width:400px){
+@media all and (max-width:480px) and (min-width:401px){
 	.wrap{
 		width:360px;
-		padding:10px;
 	}
 	.menu-wrap{
 		width:360px;
-		padding:0 10px;
 	}
 	.text{
 		display:none;
+	}
+	.header{
+		padding: 10px 10px;
 	}
 	.vals-wrapper {
 		width:360px;
@@ -321,10 +311,6 @@ h2
 	}
 	#zmanim-header {
 		font-size:1.4em;
-	}
-	.logo {
-		margin: -20px 60px 0 0px;
-		padding:5px;
 	}
 	.span_1_of_3 {
 		width:100%;
@@ -346,6 +332,15 @@ h2
 	.text{
 		display:none;
 	}
+	.header{
+		padding: 10px 0;
+	}
+	.menu-wrap .donate
+	{
+		margin: 10px 0 -10px 0;
+		float:none;
+	}
+
 	.vals-wrapper {
 		width:300px;
 	}
@@ -359,8 +354,8 @@ h2
 		font-size:1.4em;
 	}
 	.logo {
-		margin: -20px 60px 0 0px;
-		padding:5px;
+		text-align:center;
+		float:none;
 	}
 	.span_1_of_3 {
 		width:100%;
@@ -377,10 +372,13 @@ h2
 	}
 	.menu-wrap{
 		width:220px;
-		padding:0 10px;
+		padding: 10px 10px;
 	}
 	.text{
 		display:none;
+	}
+	.header{
+		padding: 10px 0;
 	}
 	.vals-wrapper {
 		width:220px;
@@ -393,10 +391,17 @@ h2
 	}
 	#zmanim-header {
 		font-size:1.2em;
+	}	
+	.menu-wrap .donate{
+		font-size:1.7em;
+		margin: 10px 0 -10px 0;
+		float:none;
 	}
 	.logo {
-		margin: -20px 20px 0 0px;
-		padding:0px;
+		text-align:center;
+		float:none;
+		font-size:1.7em;
+		padding:5px;
 	}
 	.span_1_of_3 {
 		width:100%;

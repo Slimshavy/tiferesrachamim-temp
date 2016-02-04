@@ -49,10 +49,10 @@
    <div class="content">
       <div class="header">
 	 <div class="menu-wrap">
-            <div class="logo">
-	       <a href="/">Tiferes Rachamim</a> 
-	    </div>
+            <div class="logo"><a href="/">Tiferes Rachamim</a> </div>
+	    <div class="donate"><a href="/donate"> Donate </a></div>
 	 <div class="clear"></div>
+	
       </div>
    </div>
       
