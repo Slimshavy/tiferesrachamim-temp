@@ -1,7 +1,7 @@
 <?php
 	ini_set('display_errors','Off');
 	$config = require_once("config/main.php");
-	if($config['devlopment'] = true)
+	if($config['devlopment'] == true)
 		ini_set('display_errors','On');
 
 	$title = '';
