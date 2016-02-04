@@ -40,6 +40,11 @@
   color: #777;
   position: relative;
 }
+.menu-wrap .donate
+{
+	visibility: hidden;
+	height: 0;
+}
 .error-msg
 {
   width: 100%;
