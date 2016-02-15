@@ -8,5 +8,5 @@ ErrorDocument 404 /master.php?route=notfound
 ErrorDocument 403 /master.php?route=notfound
 
 RewriteEngine On
-RewriteRule ^(donate|checkout)/?$ /master.php?route=$1 [NC,L]
+RewriteRule ^(donate|checkout|donatea1b2c3|joinwhatsapp)/?$ /master.php?route=$1 [NC,L]
 

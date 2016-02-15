@@ -1,46 +1,66 @@
 .profile__form {
-	background: white;
-	position:relative;
 	padding: 3em;
-	border-radius: .25em;
-	-webkit-filter: drop-shadow(0 0 2em rgba(0,0,0,0.2));
-	display: block;
 }
 .profile__fields {
 	width:100%;
 	display: block;
 }
 .profile__footer {
+	margin-top:10px;
 	width:100%;
 	display: block;
 }
 .field
 {
-	
   	vertical-align:top;
 	display:inline-block;
   	width: 100%;
 }
-#cvv, #expiration, #city {
+.input {
+	width: 100%;
+	font-size: 100%;
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+	height: 2rem;
+	line-height: 2rem;
+	border-bottom: 1px solid #eee;
+	color: #777;
+	position: relative;
+}
+#monthly-wrap {
+	display:block;
+  	margin: 0 auto;
+	text-align:center;
+}
+#monthly-wrap p, #monthly-wrap label{
+  	color: #777;
+  	
+}
+#monthly-wrap .radio-wrap
+{
+	position:relative;
+	width: 200px;
+  	margin: 0 auto;
+  	/*transform: translateX(-50%);
+	left:50%;*/
+}
+#monthly-wrap .radio-field
+{
+	display:inline-block;
+	width:48%;
+	margin:0;
+}
+
+.half {
   width: 49%;
 }
 
 #state, #postal{
 	width:24%;
 }
-.input {
-  width: 100%;
-  font-size: 100%;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  height: 2rem;
-  line-height: 2rem;
-  border-bottom: 1px solid #eee;
-  color: #777;
-  position: relative;
-}
-.menu-wrap .donate
+
+header .donate-link
 {
 	visibility: hidden;
 	height: 0;
@@ -54,7 +74,6 @@
 .profile__footer .disclaimer
 {	
 	width:100%;
-	font-family: 'Abel', Ariel, Tahoma;
 	color:black;
 	padding-bottom:20px;
   	text-align:center;
@@ -64,59 +83,45 @@
   outline: 0;
   border-color: #ccc;
 }
-.btn {
-  font-family: 'Abel', Ariel, Tahoma;
-  position:relative;
-  border: 0;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  padding: 0 1.5rem;
-  color: white;
-  background: #27ada6;
-  text-transform: uppercase;
-  border-radius: .25rem;
-  letter-spacing: .2em;
-  margin-left: 5px;
+.btn 
+{
+	height: 2.5rem;
+	line-height: 2.5rem;
+	padding: 0 1.5rem;
+	margin-right:10px;
 }
-.btn:hover{
-  background: #27bfb6;
-}
-
 .profile__footer .btn
 {
-  margin:0;
-  transform: translateX(-50%);
-  left:50%;
+  	transform: translateX(-50%);
+  	left:50%;
 }
-
+.hidden
+{
+	visibility: hidden;
+	height: 0;
+}
+.subscription-wrapper p
+{
+	margin-top:50px;
+  	text-align:center;
+	color: #777;
+}
 @media all and (max-width:640px) and (min-width:500px){
-	#city {
-	  width: 100%;
-	}
-
-	#state, #postal{
-		width:49%;
-	}
-}
-@media all and (max-width:500px) and (min-width:400px){
-	#cvv, #expiration, #city  {
-	  width: 100%;
-	}
 	
 	#state, #postal{
 		width:49%;
 	}
-}
-@media all and (max-width:400px) and (min-width:240px){
-	#cvv, #expiration, #city, #state, #postal  {
+
+	#city {
 	  width: 100%;
 	}
 }
-@media print
-{
-	.btn
-	{
-    		visibility: hidden;
-		height: 0;
-	}
+@media all and (max-width:500px) and (min-width:400px){
+	.half{width: 100%;}
+	#state, #postal{width:49%;}
 }
+@media all and (max-width:400px) and (min-width:240px){
+	.half, #state, #postal{width: 100%;}
+	.btn{font-size:60%;height:1.5rem;line-height:1.5rem}
+}
+@media print{.btn{visibility: hidden;height: 0;}}

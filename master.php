@@ -4,9 +4,12 @@
 	if($config['devlopment'] == true)
 		ini_set('display_errors','On');
 
+	require_once('helpers/MailerHelper.php');
+	require_once("dal/access.php");
+
 	$title = '';
 	$route = 'notfound';
-	$view = 'notfound.php';
+	$view = 'views/notfound.php';
 	$styles = '';
 	$scripts = '';
 
@@ -15,10 +18,21 @@
 		$r = 'controllers/'.$_GET['route'].'Controller.php';	
 		if(file_exists($r ))
 		{
+
 			$route = $r;
 			$controller = require_once($route);
-			$title = $controller['title'];
+			
 			$view = 'views/'.$controller['view'].'.php';
+
+			if(isset($controller['type']) && $controller['type'] == 'json')
+			{
+				header('Content-Type: application/json');
+				require_once($view);
+				exit();
+			}
+	
+			$title = $controller['title'];
+			
 			
 			if(isset($controller['styles'] ))
 				foreach($controller['styles'] as $style)
@@ -34,7 +48,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-   <title>Tiferes Rachamim <?php echo $title ?></title>
+   <title>Tiferes Rachamim <?php/* echo $title*/ ?></title>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <link rel="shortcut icon" href='images/favicon.ico' type='imagex-icon' />
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -47,26 +61,26 @@
 
 <body>
    <div class="content">
-      <div class="header">
-	 <div class="menu-wrap">
+      <header>
+	 <div class="inner">
             <div class="logo"><a href="/">Tiferes Rachamim</a> </div>
-	    <div class="donate"><a href="/donate"> Donate </a></div>
+	    <div class="donate-link"><a href="/donate"> Donate </a></div>
 	 <div class="clear"></div>
 	
-      </div>
-   </div>
-      
+      </header>
+      <main>
 <?php
 	require_once($view);
 	ob_end_flush();
 ?>
+      </main>
+      <div class="clear"></div>
+      <div class="push"></div>
+   </div>
 
-	<div class="clear"></div>
-	<div class="push"></div>
-   </div>
-   <div class="footer">
+   <footer>
       ©2016 Tiferes Rachamim. All rights reserved | Created by Shavy Yarmush
-   </div>
+   </footer>
 
 </body>
 </html>

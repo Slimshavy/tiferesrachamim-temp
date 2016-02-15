@@ -1,5 +1,13 @@
 $(document).ready(function () {
 
+$('#card-number input').val('4111 1111 1111 1111');
+$('#cvv input').val('111');
+$('#expiration input').val('11/11');
+$('#card-name input').val('sam');
+	$("#donate-wrap").toggleClass("hidden");
+	$("#noscript-wrap").hide();
+	$("#monthly-info").hide();
+
 	var luhnChk=function(a){return function(c){for(var l=c.length,b=1,s=0,v;l;)v=parseInt(c.charAt(--l),10),s+=(b^=1)?a[v]:v;return s&&0===s%10}}([0,2,4,6,8,1,3,5,7,9]);
 
 	braintree.setup($('.client-token').val(), "custom", {id: "checkout"});
@@ -82,14 +90,12 @@ $(document).ready(function () {
 	});
 
     	var tz = jstz.determine(); // Determines the time zone of the browser client
-    	$('.client-tz').val(tz.name()); //'Asia/Kolhata' for Indian Time.
+    	$('.client-tz').val(tz.name());
 
-
-	/*$('.card-number').keypress(function (e) {
-  		$('.card-number').val( $('.card-number').val().replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim());
+	$("input[name=monthly]").change(function(){
+		if($("input[name=monthly]:checked").val() == 'yes')
+			$("#monthly-info").show();
+		else
+			$("#monthly-info").hide();
 	});
-
-	$('.card-number').validateCreditCard(function(result){
-		$('#errors').text(result.toString());
-	});*/
 });

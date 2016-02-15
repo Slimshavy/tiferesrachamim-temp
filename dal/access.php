@@ -1,6 +1,8 @@
 <?php
 class MysqlAccess
 {
+	private static $instance = null;
+
 	private $config = null;	
 	private $conn = null;
 
@@ -15,26 +17,39 @@ class MysqlAccess
 		}
 	}
 
-	function insert($sql)
+	public static function insert($sql)
 	{
 		if(stripos($sql, 'insert into') === FALSE)
 		{
-			$this->conn->query("insert into log (description, log_time) values('Error (logic): $sql', now());");
+			log('Error (logic): '.$sql);
 	    		throw new Exception('Invalid query: '.$sql);
 		}
 
-		if ($this->conn->query($sql) === FALSE) 
+		if (MysqlAccess::getInstance()->conn->query($sql) === FALSE) 
 		{
-			$this->conn->query("insert into log (description, log_time) values('Error (runtime): $sql', now());");
+			log('Error (runtime): '.$sql);
     			throw new Exception('Error inserting record: '.$sql);
 		}
 	
-		return $this->conn->insert_id;
+		return MysqlAccess::getInstance()->conn->insert_id;
+	}
+
+	public static function log($description)
+	{
+		MysqlAccess::getInstance()->conn->query("insert into log (description, log_time) values('$description', now());");
 	}
 
 	function __destruct() 
 	{
 		$this->conn->close();
+	}
+
+	private static function getInstance()
+	{
+		if(static::$instance === null)
+			static::$instance = new MysqlAccess();
+	
+		return static::$instance;
 	}
 }
 ?>

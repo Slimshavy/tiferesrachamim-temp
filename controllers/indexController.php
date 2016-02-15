@@ -1,6 +1,8 @@
 <?php
 	return array(
 		'title' => 'Home',
-		'view' => 'index'
+		'view' => 'index',
+		'styles'=> ['index'],
+		'scripts' => ['jquery','index'],
 	);
 ?>
