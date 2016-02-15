@@ -48,7 +48,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-   <title>Tiferes Rachamim <?php/* echo $title*/ ?></title>
+   <title>Tiferes Rachamim <?php echo $title; ?></title>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <link rel="shortcut icon" href='images/favicon.ico' type='imagex-icon' />
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
