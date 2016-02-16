@@ -14,32 +14,32 @@
     <form id="checkout" action="/checkout" method="post" class="profile__form">
       <div class="profile__fields">
 
-	<div class="field half" id="firstname">
+	<div class="field half" id="fname">
           <input class="input" placeholder="First Name" name='fname' required>
           <div class="error-msg"></div>
         </div>
 
-        <div class="field half" id="lastname">
+        <div class="field half" id="lname">
           <input class="input" placeholder="Last Name" name='lname' required>
           <div class="error-msg"></div>
         </div>
 
-        <div class="field" id="card-number">
+        <div class="field" id="cardnumber">
           <input class="input" data-braintree-name="number" name='cardnumber' placeholder="Credit Card Number" required>
           <div class="error-msg"></div>
         </div>
 
-        <div class="field half" id="cvv">
+        <div class="field half" id="cvc">
           <input class="input" data-braintree-name="cvv" name='cvc' placeholder="Security Code" required>
           <div class="error-msg"></div>
         </div>
 
-        <div class="field half" id="expiration">
-          <input class="input" data-braintree-name="expiration_date" name='cc-exp' placeholder="Expiration (mm/yy)" required>
+        <div class="field half" id="ccexp">
+          <input class="input" data-braintree-name="expiration_date" name='ccexp' placeholder="Expiration (mm/yy)" required>
           <div class="error-msg"></div>
         </div>
 
-        <div class="field" id="card-name">
+        <div class="field" id="ccname">
           <input class="input" data-braintree-name="cardholder_name" name='ccname' placeholder="Cardholder Name" required>
           <div class="error-msg"></div>
         </div>
@@ -59,7 +59,7 @@
           <div class="error-msg"></div>
         </div>
 
-        <div class="field" id="postal">
+        <div class="field" id="zip">
           <input class="input" data-braintree-name="postal_code" name='zip' placeholder="Zip" required>
           <div class="error-msg"></div>
         </div>

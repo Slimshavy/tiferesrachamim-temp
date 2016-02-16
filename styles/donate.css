@@ -56,7 +56,7 @@
   width: 49%;
 }
 
-#state, #postal{
+#state, #zip{
 	width:24%;
 }
 
@@ -108,7 +108,7 @@ header .donate-link
 }
 @media all and (max-width:640px) and (min-width:500px){
 	
-	#state, #postal{
+	#state, #zip{
 		width:49%;
 	}
 
@@ -118,10 +118,10 @@ header .donate-link
 }
 @media all and (max-width:500px) and (min-width:400px){
 	.half{width: 100%;}
-	#state, #postal{width:49%;}
+	#state, #zip{width:49%;}
 }
 @media all and (max-width:400px) and (min-width:240px){
-	.half, #state, #postal{width: 100%;}
+	.half, #state, #zip{width: 100%;}
 	.btn{font-size:60%;height:1.5rem;line-height:1.5rem}
 }
 @media print{.btn{visibility: hidden;height: 0;}}
