@@ -1,10 +1,5 @@
-$(document).ready(function () {
-
-	$('#cardnumber input').val('4111 1111 1111 1111');
-	$('#cvc input').val('111');
-	$('#ccexp input').val('11/11');
-	$('#ccname input').val('sam');
-
+$(document).ready(function () 
+{
 	//show donate form, hide noscript and hide recurring donation disclaimer.
 	$("#donate-wrap").toggleClass("hidden");
 	$("#noscript-wrap").hide();
@@ -80,46 +75,6 @@ $(document).ready(function () {
 				$('#' + k + ' .error-msg').text('');	
 		});
 	});
-
-	/*$('#state input').focusout(function(){
- 		var val = $(this).val().trim();
-		var regex = /^[a-zA-Z]{2}$/;
-
-		if(!val.match(regex))
-			$(this).next().text('');
-		else
-			$(this).next().text('');
-	});
-
-	$('#postal input').focusout(function(){
- 		var val = $(this).val().trim();
-		var regex = /^\d{5}$/;
-
-		if(!val.match(regex))
-			$(this).next().text('Please enter a valid zip code (e.g. 11213)');
-		else
-			$(this).next().text('');
-	});
-
-	$('#email input').focusout(function(){
- 		var val = $(this).val().trim();
-		var regex = /^\S{2,}@\S{2,}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$/;
-
-		if(!val.match(regex))
-			$(this).next().text('Please enter a valid email (e.g. info@tiferesrachamim.com)');
-		else
-			$(this).next().text('');
-	});
-
-	$('#amount input').focusout(function(){
- 		var val = $(this).val().trim();
-		var regex = /^\d{1,5}(\.\d{2})?$/;
-
-		if(!val.match(regex))
-			$(this).next().text('Please enter a valid amount (e.g. 180.00)');
-		else
-			$(this).next().text('');
-	});*/
 
     	var tz = jstz.determine(); // Determines the time zone of the browser client
     	$('.client-tz').val(tz.name());
