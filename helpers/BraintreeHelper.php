@@ -83,7 +83,7 @@ class BraintreeHelper
 		$sql = 'INSERT INTO subscriptions (user_id, plan_name, price, status, braintree_subscription_id, date_created) ';
 		$sql .= "VALUES ('".$i['userId']."','".$s->planId."',".$s->price.",'".$s->status."','".$s->id."', now());";
 
-		MysqlAccess::insert($sql);
+		$info['subscriptionId'] = MysqlAccess::insert($sql);
 
 		return $this->retrieveTransactioResults($success, $subscription->transactions[0], $info);
 	}
