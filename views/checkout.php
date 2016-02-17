@@ -55,7 +55,7 @@
             <div class="clear"></div>
 
 	    <span class='lbl'>Name</span>
-            <span class='val'><?php echo $fname.' '.$lname; ?></span>
+            <span class='val'><?php echo ucwords(ucwords($fname.' '.$lname)); ?></span>
             <div class="clear"></div>
 
             <span class='lbl'>Amount</span>
@@ -71,11 +71,11 @@
             <div class="clear"></div>
 
             <span class='lbl'>Payment Type</span>
-            <span class='val'><?php echo $result['paymentType']; ?></span>
+            <span class='val'><?php echo ucwords(ucwords($result['paymentType'])); ?></span>
             <div class="clear"></div>
 
             <span class='lbl'>Card Type</span>
-            <span class='val'><?php echo $result['cardType']; ?></span>
+            <span class='val'><?php echo ucwords(ucwords($result['cardType'])); ?></span>
             <div class="clear"></div>
 
             <span class='lbl'>Last 4 of Account Number</span>
@@ -106,7 +106,7 @@
             <div class="clear"></div>
 
             <span class='lbl'>Recuring Subscription Status</span>
-            <span class='val'><?php echo $result['status']; ?></span>
+            <span class='val'><?php echo ucwords(ucwords($result['status'])); ?></span>
             <div class="clear"></div>
          </div>
 <?php

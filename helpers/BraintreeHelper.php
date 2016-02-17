@@ -208,12 +208,12 @@ class BraintreeHelper
 			$body .= $info['message']."\n\n";
 
 			$body .= str_pad("Confirmation Number: ",$padLength).$info['confirmationNumber']."\n";
-			$body .= str_pad("Name: ",$padLength). $info['fname'].' '.$info['lname']."\n";
+			$body .= str_pad("Name: ",$padLength). ucwords(ucwords($info['fname'].' '.$info['lname']))."\n";
 			$body .= str_pad("Amount: ",$padLength). $info['resultAmount']."\n";
 			$body .= str_pad("Date: ",$padLength). $info['clientTransDate']."\n";
 			$body .= str_pad("Authorization Code: ",$padLength). $info['authCode']."\n"; 
-			$body .= str_pad("Payment Type: ",$padLength). $info['paymentType']."\n";
-			$body .= str_pad("Card Type: ",$padLength). $info['cardType']."\n";
+			$body .= str_pad("Payment Type: ",$padLength).ucwords(ucwords($info['paymentType']))."\n";
+			$body .= str_pad("Card Type: ",$padLength).ucwords(ucwords($info['cardType']))."\n";
 			$body .= str_pad("Last 4 of Account Number: ",$padLength). $info['last4']."\n"; 
 		}
 
@@ -227,7 +227,7 @@ class BraintreeHelper
 			$body .= str_pad("Recuring Subscription ID: ",$padLength). $info['braintreeSubscriptionId']."\n";
 			$body .= str_pad("Recuring Amount: ",$padLength). $info['price']."\n";
 			$body .= str_pad("Recuring Day of Month: ",$padLength). $info['billingDayOfMonth']."\n";
-			$body .= str_pad("Recuring Subscription Status: ",$padLength). $info['status']."\n";
+			$body .= str_pad("Recuring Subscription Status: ",$padLength).ucwords(ucwords($info['status']))."\n";
 		}
 
 		if (strlen($body) <= 0)
