@@ -87,6 +87,7 @@ class BraintreeHelper
 
 		return $this->retrieveTransactioResults($success, $subscription->transactions[0], $info);
 	}
+
 	function retrieveTransactioResults($success, $transaction, $info)
 	{
 		$card = $transaction->creditCard;//last4, debit, prepaid
@@ -142,6 +143,8 @@ class BraintreeHelper
 				$info['message'] = "The transaction was declined due to an unknown reason. Please contact your merchant for more information.";
 		}
 		
+		$this->emailReceipt($info);
+
 		return $info;
 	}
 
@@ -191,6 +194,49 @@ class BraintreeHelper
 			'message'=>'There was an error with the '.$source.'. Please try again later.',
 			'success' => '',
 		];
+	}
+
+	private function emailReceipt($info)
+	{
+		$padLength = 35;
+
+		$body = '';
+
+		if ($info['success'])
+		{
+				
+			$body .= $info['message']."\n\n";
+
+			$body .= str_pad("Confirmation Number: ",$padLength).$info['confirmationNumber']."\n";
+			$body .= str_pad("Name: ",$padLength). $info['fname'].' '.$info['lname']."\n";
+			$body .= str_pad("Amount: ",$padLength). $info['resultAmount']."\n";
+			$body .= str_pad("Date: ",$padLength). $info['clientTransDate']."\n";
+			$body .= str_pad("Authorization Code: ",$padLength). $info['authCode']."\n"; 
+			$body .= str_pad("Payment Type: ",$padLength). $info['paymentType']."\n";
+			$body .= str_pad("Card Type: ",$padLength). $info['cardType']."\n";
+			$body .= str_pad("Last 4 of Account Number: ",$padLength). $info['last4']."\n"; 
+		}
+
+		if (isset($info['subscription']))
+		{
+
+ 	       		$body .= "\n\nYou have agreed to recurring charges on a monthly basis. You may call Laibie at (347) 403-1660 to cancel the ";
+			$body .= "recurring charges at any time. Please review the information below and contact Laibie immediately if ";
+			$body .= "the information is incorrect.\n\n";
+			
+			$body .= str_pad("Recuring Subscription ID: ",$padLength). $info['braintreeSubscriptionId']."\n";
+			$body .= str_pad("Recuring Amount: ",$padLength). $info['price']."\n";
+			$body .= str_pad("Recuring Day of Month: ",$padLength). $info['billingDayOfMonth']."\n";
+			$body .= str_pad("Recuring Subscription Status: ",$padLength). $info['status']."\n";
+		}
+
+		if (strlen($body) <= 0)
+		{
+			MysqlAccess::log("Attempted to email empty text to ".$info['email']);
+			return;
+		}
+
+		MailerHelper::mail($info['email'],$info['header'], $body);
 	}
 
 	public static function getInstance()

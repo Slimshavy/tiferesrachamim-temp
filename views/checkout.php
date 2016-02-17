@@ -55,7 +55,7 @@
             <div class="clear"></div>
 
 	    <span class='lbl'>Name</span>
-            <span class='val'><?php echo 'test';//$fname.' '.$lname; ?></span>
+            <span class='val'><?php echo $fname.' '.$lname; ?></span>
             <div class="clear"></div>
 
             <span class='lbl'>Amount</span>
