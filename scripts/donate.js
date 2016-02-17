@@ -49,9 +49,9 @@ $(document).ready(function ()
 		address: [/^[a-zA-Z0-9 #-.,]{1,100}$/,'Please enter a valid address (e.g. 123 main street)'],
 		city: [/^[a-zA-Z -]{1,50}$/,'Please enter a valid city (e.g. Brooklyn)'],
 		state: [/^[a-zA-Z]{2}$/,'Please enter a valid state (e.g. NY)'],
-		zip: [/^\d{5}$/,'Please enter a valid name (e.g. 12345)'],
-		email: [/^\S{2,50}@\S{2,50}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$/,'Please enter a valid name (e.g. info@tiferesrachamim.com)'],
-		amount: [/^\d{1,5}(\.\d{2})?$/,'Please enter a valid name (e.g. 180.00)'],
+		zip: [/^\d{5}$/,'Please enter a valid zip (e.g. 12345)'],
+		email: [/^\S{2,50}@\S{2,50}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2,10})?$/,'Please enter a valid email (e.g. info@tiferesrachamim.com)'],
+		amount: [/^\d{1,5}(\.\d{2})?$/,'Please enter a valid amount (e.g. 180.00)'],
 	};
 
 	$('input').focusout(function()
