@@ -45,7 +45,7 @@ $(document).ready(function ()
 		lname: [/^[a-zA-Z]{1,50}$/,'Please enter a valid name (e.g. Doe)'],
 		cvc: [/^\d{3,4}$/,'Please enter a valid Security Code (e.g. 123)'],
 		ccexp: [/^\d{2}\/(\d{2}|\d{4})$/,'Please enter a valid expiration date (e.g. 11/20)'],
-		ccname: [/^[a-zA-Z]{1,50}( [a-zA-Z]{1,50}){1,3}$/,'Please enter a valid name (e.g. John Doe)'],
+		ccname: [/^[a-zA-Z]{1,50}( [a-zA-Z]{1,50}){0,3}$/,'Please enter a valid name (e.g. John Doe)'],
 		address: [/^[a-zA-Z0-9 #-.,]{1,100}$/,'Please enter a valid address (e.g. 123 main street)'],
 		city: [/^[a-zA-Z -]{1,50}$/,'Please enter a valid city (e.g. Brooklyn)'],
 		state: [/^[a-zA-Z]{2}$/,'Please enter a valid state (e.g. NY)'],
