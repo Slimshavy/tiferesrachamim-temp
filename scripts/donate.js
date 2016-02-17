@@ -14,22 +14,6 @@ $(document).ready(function ()
 	$('#cardnumber input').payment('formatCardNumber');
 	$('#cvc input').payment('formatCardCVC');
 
-	//check for errors
-	$('.profile__form #submit').click(function(){
-		var bad = false;
-		
-		$('.error-msg').each(function(index){
-			bad = bad || $(this).text().trim().length > 0;
-		});
-		if(bad)
-		{
-			$('.error-msg').animate({fontSize:'150%'},50);
-			$('.error-msg').animate({fontSize:'100%'},50);
-			return false;
-		}
-		return true;
-	});
-
 	$('#cardnumber input').focusout(function(){
  		var val = $(this).val().replace(/\s/g, '');
 		
@@ -74,6 +58,29 @@ $(document).ready(function ()
 			if($('#' + k + ' input').val().match(v[0]))
 				$('#' + k + ' .error-msg').text('');	
 		});
+	});
+
+	//check for errors
+	$('.profile__form #submit').click(function(){
+		var bad = false;
+		
+		$.each(r, function(k,v)
+		{
+			if(!$('#' + k + ' input').val().match(v[0]))
+				$('#' + k + ' .error-msg').text(v[1]);	
+		});
+		
+		$('.error-msg').each(function(index){
+			bad = bad || $(this).text().trim().length > 0;
+		});
+
+		if(bad)
+		{
+			$('.error-msg').animate({fontSize:'150%'},50);
+			$('.error-msg').animate({fontSize:'100%'},50);
+			return false;
+		}
+		return true;
 	});
 
     	var tz = jstz.determine(); // Determines the time zone of the browser client
