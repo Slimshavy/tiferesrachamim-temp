@@ -93,19 +93,19 @@
  	       You have agreed to recurring charges on a monthly basis. You may call Laibie at (347) 403-1660 to cancel the recurring charges at any time. 
 	       Please review the information below and contact Laibie immediately if the information is incorrect.
 	    </p>
-            <span class='lbl'>Recuring Subscription ID</span>
+            <span class='lbl'>Recurring Subscription ID</span>
             <span class='val'><?php echo $result['braintreeSubscriptionId']; ?></span>
             <div class="clear"></div>
 
-	    <span class='lbl'>Recuring Amount</span>
+	    <span class='lbl'>Recurring Amount</span>
             <span class='val'>$<?php echo $result['price']; ?></span>
             <div class="clear"></div>
 
-            <span class='lbl'>Recuring Day of Month</span>
+            <span class='lbl'>Recurring Day of Month</span>
             <span class='val'><?php echo $result['billingDayOfMonth']; ?></span>
             <div class="clear"></div>
 
-            <span class='lbl'>Recuring Subscription Status</span>
+            <span class='lbl'>Recurring Subscription Status</span>
             <span class='val'><?php echo ucwords(ucwords($result['status'])); ?></span>
             <div class="clear"></div>
          </div>

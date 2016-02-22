@@ -127,7 +127,7 @@ class BraintreeHelper
 		if ($info['success'])
 		{
 			$info['header'] = 'Thank you for your donation!';
-			$info['message'] = "Your donation has been succesfully processed. Thank you for helping us help you.";
+			$info['message'] = "Your donation has been successully processed. Thank you for helping us help you.";
 		}
 		else
 		{
@@ -224,10 +224,10 @@ class BraintreeHelper
 			$body .= "recurring charges at any time. Please review the information below and contact Laibie immediately if ";
 			$body .= "the information is incorrect.\n\n";
 			
-			$body .= str_pad("Recuring Subscription ID: ",$padLength). $info['braintreeSubscriptionId']."\n";
-			$body .= str_pad("Recuring Amount: ",$padLength). $info['price']."\n";
-			$body .= str_pad("Recuring Day of Month: ",$padLength). $info['billingDayOfMonth']."\n";
-			$body .= str_pad("Recuring Subscription Status: ",$padLength).ucwords(ucwords($info['status']))."\n";
+			$body .= str_pad("Recurring Subscription ID: ",$padLength). $info['braintreeSubscriptionId']."\n";
+			$body .= str_pad("Recurring Amount: ",$padLength). $info['price']."\n";
+			$body .= str_pad("Recurring Day of Month: ",$padLength). $info['billingDayOfMonth']."\n";
+			$body .= str_pad("Recurring Subscription Status: ",$padLength).ucwords(ucwords($info['status']))."\n";
 		}
 
 		if (strlen($body) <= 0)
