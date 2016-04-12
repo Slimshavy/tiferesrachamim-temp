@@ -74,6 +74,17 @@
 	ob_end_flush();
 ?>
       </main>
+
+      <div class="links">
+	<a href="/donate"> DONATE </a>	
+	<span class='inline-break'></span>
+	<a href='/contact'>CONTACT US</a>	
+	<span class='inline-break'></span>
+	<a href='/privacy'>PRIVACY POLICY</a>	
+	<span class='inline-break'></span>
+	<a href='/refunds'>REFUND POLICY</a>
+      </div>
+
       <div class="clear"></div>
       <div class="push"></div>
    </div>

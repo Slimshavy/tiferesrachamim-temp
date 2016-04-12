@@ -1,15 +1,16 @@
 <?php
 class MailerHelper
 {
-	const header = 'from: Tiferes Rachamim <info@tiferesrachamim.com>'."\r\n".'Bcc: info@tiferesrachamim.com';
-
 	public static function mail($to, $subject, $body)
 	{
-		$to ='shmuelyarmush@gmail.com';
+		$headers = "from: Tiferes Rachamim <info@tiferesrachamim.com>";
+		$headers .= "\r\n";
+		$headers .= "Bcc: info@tiferesrachamim.com";
+
 		if(!filter_var($to, FILTER_VALIDATE_EMAIL))
 			throw new Exception($to.' is not a vlid email address');
 
-		$success = mail($to, $subject, $body, self::header);
+		$success = mail($to, $subject, $body, $headers);
 
 		$desc = $success ?'Sucessfuly ':'Unsuccessfuly ';
 		$desc .= 'sent email to '.$to.': '.$body;			

@@ -7,7 +7,7 @@
             <div class="clear"></div>
 
 	    <span class='lbl'>Email</span>
-            <span class='val'><a href='mailto:info@tiferesrachamim.com'>Info@TiferesRachamim.com</span>
+            <span class='val'><a href='mailto:info@tiferesrachamim.com'>Info@TiferesRachamim.com</a></span>
             <div class="clear"></div>
 
             <span class='lbl'>Address</span>

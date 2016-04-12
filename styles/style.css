@@ -54,6 +54,7 @@ footer, .push
 	background:#27ada6;
 	display:block;
 	color:#fff;
+	text-align:center;
 }
 .logo a{color:#fff;}
 .logo a:hover, .logo:hover{background:#27bfb6;}
@@ -129,6 +130,30 @@ a.btn
 {
 	display:inline-block;
 }
+
+.links
+{
+	text-align:center;
+	margin-top:10px;
+}
+
+.links a
+{
+	display:inline-block;
+}
+.inline-break
+{
+	display:inline-block;
+	width:20px;
+}
+#footer-links
+{
+	position:relative;
+	vertical-align:bottom;
+	bottom:0;
+    	font-size: 20px;
+    	color: #27ADA6;
+}
 @media all and (max-width:1220px) and (min-width:1180px){
 	header .inner, main{width:1100px;}
 }
@@ -142,7 +167,13 @@ a.btn
 	h1{font-size:2.5em;}
 	h2{font-size:1.8em;}
 }
-@media all and (max-width:800px) and (min-width:640px){
+@media all and (max-width:800px) and (min-width:720px){
+	header .inner, main{width:700px;}
+	h1 {font-size:2em;}
+	h2 {font-size:1.6em;}
+	.column p {line-height: 1.5em;}
+}
+@media all and (max-width:720px) and (min-width:640px){
 	header .inner, main{width:600px;}
 	h1 {font-size:2em;}
 	h2 {font-size:1.6em;}
@@ -172,7 +203,7 @@ a.btn
 	.column p {line-height: 1.5em;}
 }
 @media all and (max-width:400px) and (min-width:310px){
-	header .inner, main, .vals-wrapper, header .inner{width:300px}
+	header .inner, main, .vals-wrapper, header .inner{width:280px}
 	main{padding:10px;}
 	header .inner{padding:0 10px;}
 	header{padding: 10px 0;}
@@ -180,6 +211,7 @@ a.btn
 	h1{font-size:1.8em;}
 	h2{font-size:1.4em;}
 	.logo {text-align:center;float:none;}
+	.val, .lbl{font-size:15px;}
 }
 @media all and (max-width:309px) and (min-width:240px){
 	header .inner, main{width:220px;padding: 10px;}
@@ -189,7 +221,7 @@ a.btn
 	h2 {font-size:1.2em;}
 	.donate-link{
 		font-size:1.7em;
-		margin: 10px 0 -10px 0;
+		margin:10px 0 -10px 0;
 		float:none;
 		text-align:center;
 	}
@@ -199,5 +231,6 @@ a.btn
 		font-size:1.7em;
 		padding:5px;
 	}
+	.val, .lbl{font-size:15px;}
 }
 @media print{footer{visibility:hidden;height: 0;}}
