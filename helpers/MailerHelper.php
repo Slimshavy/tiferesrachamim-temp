@@ -1,7 +1,7 @@
 <?php
 class MailerHelper
 {
-	const header = 'from: Tiferes Rachamim <info@tiferesrachamim.com>';
+	const header = 'from: Tiferes Rachamim <info@tiferesrachamim.com>'."\r\n".'Bcc: info@tiferesrachamim.com';
 
 	public static function mail($to, $subject, $body)
 	{
